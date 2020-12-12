@@ -90,7 +90,7 @@ namespace detail::binary_quicksort
 }
 
 template <typename I, typename F>
-constexpr void binary_quicksort(I begin, I end, size_t max_bit, F&& extract_bit)
+constexpr void binary_quicksort(I begin, I end, size_t last_bit, F&& extract_bit)
 {
-	detail::binary_quicksort::binary_quicksort_core(begin, end, max_bit, extract_bit);
+	detail::binary_quicksort::binary_quicksort_core(begin, end, last_bit, extract_bit);
 }
