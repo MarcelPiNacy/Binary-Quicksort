@@ -1,18 +1,18 @@
 /*
 	MIT License
-	
+
 	Copyright (c) 2020 Marcel Pi Nacy
-	
+
 	Permission is hereby granted, free of charge, to any person obtaining a copy
 	of this software and associated documentation files (the "Software"), to deal
 	in the Software without restriction, including without limitation the rights
 	to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
 	copies of the Software, and to permit persons to whom the Software is
 	furnished to do so, subject to the following conditions:
-	
+
 	The above copyright notice and this permission notice shall be included in all
 	copies or substantial portions of the Software.
-	
+
 	THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
 	IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
 	FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
@@ -30,22 +30,15 @@ namespace detail::binary_quicksort
 	template <typename I, typename F>
 	constexpr I binary_partition(I begin, I end, size_t current_bit, F& extract_bit)
 	{
-		const auto limit = end;
-		--end;
-		
 		while (true)
 		{
 			while (!extract_bit(*begin, current_bit) && begin < end)
 				++begin;
-			while (extract_bit(*end, current_bit) && begin < end)
-				--end;
+			do { --end; } while (extract_bit(*end, current_bit) && begin < end);
 			if (begin >= end)
 				break;
 			std::iter_swap(begin, end);
 		}
-
-		if (!extract_bit(*begin, current_bit) && begin < limit)
-			++begin;
 		return begin;
 	}
 
